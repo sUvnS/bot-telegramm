@@ -6,9 +6,8 @@ logger = logging.getLogger('LogTag')
 
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
-from aiogram.utils import executor
 
-from config import TOKEN
+from bot.config.config import TOKEN
 from stickers import stickers
 
 bot = Bot(token=TOKEN)
