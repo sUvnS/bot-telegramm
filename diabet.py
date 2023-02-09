@@ -76,7 +76,7 @@ def predict(data_list):
     classifier=RandomForestClassifier(n_estimators=100,criterion='entropy',random_state=RAND)
     classifier.fit(X_train,y_train)
     #y_pred=classifier.predict(X_test)
-    y_pred=classifier.predict([[data_list]])
+    y_pred=classifier.predict([data_list])
     return y_pred
 
 

@@ -10,13 +10,13 @@ from aiogram.types import ParseMode, InputFile
 from aiogram.utils import executor
 
 from bot1.config.config import TOKEN
-from bot1.keyboard.keybard import reply_keyboard
 from bot1.perevod import Translate
+from diabet import predict
 
 logging.basicConfig(level=logging.INFO)
 
 
-
+list=list()
 
 bot = Bot(token=TOKEN)
 
@@ -32,18 +32,18 @@ class Form(StatesGroup):
     age = State()  # Will be represented in storage as 'Form:age'
     gender = State()  # Will be represented in storage as 'Form:gender'
     q1 = State()
-    # q2 = State()
-    # q3 = State()
-    # q4 = State()
-    # q5 = State()
-    # q6 = State()
-    # q7 = State()
-    # q8 = State()
-    # q9 = State()
-    # q10 = State()
-    # q11 = State()
-    # q12 = State()
-    # q13 = State()
+    q2 = State()
+    q3 = State()
+    q4 = State()
+    q5 = State()
+    q6 = State()
+    q7 = State()
+    q8 = State()
+    q9 = State()
+    q10 = State()
+    q11 = State()
+    q12 = State()
+    q13 = State()
     q14 = State()
 
 
@@ -85,9 +85,190 @@ async def process_name(message: types.Message, state: FSMContext):
     """
     async with state.proxy() as data:
         data['q1'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
 
     await Form.next()
-    await message.reply("второй вопрос",reply_markup=reply_keyboard)
+    await message.reply("Вы испытываете неутолимую жажду?",reply_markup=reply_keyboard)
+
+@dp.message_handler(state=Form.q2)
+async def process_name(message: types.Message, state: FSMContext):
+    """
+    второй вопрос
+    """
+    async with state.proxy() as data:
+        data['q2'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
+
+    await Form.next()
+    await message.reply("Внезапная потеря веса?",reply_markup=reply_keyboard)
+
+@dp.message_handler(state=Form.q3)
+async def process_name(message: types.Message, state: FSMContext):
+    """
+    третий вопрос
+    """
+    async with state.proxy() as data:
+        data['q3'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
+
+    await Form.next()
+    await message.reply("слабость?",reply_markup=reply_keyboard)
+
+@dp.message_handler(state=Form.q4)
+async def process_name(message: types.Message, state: FSMContext):
+    """
+    четвертый вопрос
+    """
+    async with state.proxy() as data:
+        data['q4'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
+
+    await Form.next()
+    await message.reply("Повышенный аппетит, прожорливость?",reply_markup=reply_keyboard)
+
+
+@dp.message_handler(state=Form.q5)
+async def process_name(message: types.Message, state: FSMContext):
+    """
+    пятый вопрос
+    """
+    async with state.proxy() as data:
+        data['q5'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
+
+    await Form.next()
+    await message.reply("Вы больны кандидозом?", reply_markup=reply_keyboard)
+
+
+@dp.message_handler(state=Form.q6)
+async def process_name(message: types.Message, state: FSMContext):
+    """
+    шестой вопрос
+    """
+    async with state.proxy() as data:
+        data['q6'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
+
+    await Form.next()
+    await message.reply("Визуальное размытие?", reply_markup=reply_keyboard)
+
+
+@dp.message_handler(state=Form.q7)
+async def process_name(message: types.Message, state: FSMContext):
+    """
+    седьмой вопрос
+    """
+    async with state.proxy() as data:
+        data['q7'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
+
+    await Form.next()
+    await message.reply("Зуд?", reply_markup=reply_keyboard)
+
+
+@dp.message_handler(state=Form.q8)
+async def process_name(message: types.Message, state: FSMContext):
+    """
+    восьмой вопрос
+    """
+    async with state.proxy() as data:
+        data['q8'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
+
+    await Form.next()
+    await message.reply("Раздражительность?", reply_markup=reply_keyboard)
+
+
+@dp.message_handler(state=Form.q9)
+async def process_name(message: types.Message, state: FSMContext):
+    """
+    девятый вопрос
+    """
+    async with state.proxy() as data:
+        data['q9'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
+
+    await Form.next()
+    await message.reply("Есть задержка заживления ран?", reply_markup=reply_keyboard)
+
+
+@dp.message_handler(state=Form.q10)
+async def process_name(message: types.Message, state: FSMContext):
+    """
+    десятый вопрос
+    """
+    async with state.proxy() as data:
+        data['q10'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
+
+    await Form.next()
+    await message.reply("Вы частично больны синдромом Пареза?", reply_markup=reply_keyboard)
+
+
+@dp.message_handler(state=Form.q11)
+async def process_name(message: types.Message, state: FSMContext):
+    """
+    одиннадцатый вопрос
+    """
+    async with state.proxy() as data:
+        data['q11'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
+
+    await Form.next()
+    await message.reply("Вы ощущаете скованность в мышцах?", reply_markup=reply_keyboard)
+
+
+@dp.message_handler(state=Form.q12)
+async def process_name(message: types.Message, state: FSMContext):
+    """
+    двенадцатый вопрос
+    """
+    async with state.proxy() as data:
+        data['q12'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
+
+    await Form.next()
+    await message.reply("Вы больны алопецией?", reply_markup=reply_keyboard)
+
+
+@dp.message_handler(state=Form.q13)
+async def process_name(message: types.Message, state: FSMContext):
+    """
+    тринадцатый вопрос
+    """
+    async with state.proxy() as data:
+        data['q13'] = t.process_one(message.text)
+    list.append(t.process_one(message.text))
+    reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+    reply_keyboard.add("Да", "Нет")
+
+    await Form.next()
+    await message.reply("Ожирение?", reply_markup=reply_keyboard)
+
 
 @dp.message_handler(state=Form.q14)
 async def process_name(message: types.Message, state: FSMContext):
@@ -96,26 +277,20 @@ async def process_name(message: types.Message, state: FSMContext):
     """
     async with state.proxy() as data:
         data['q14'] = t.process_one(message.text)
+        list.append(t.process_one(message.text))
     markup = types.ReplyKeyboardRemove()
     #тут надо отправить ответ
     # Finish conversation
 
 
-    # And send message
-    await bot.send_message(
-        message.chat.id,
-        md.text(
-            md.text('Age:', md.code(data['age'])),
-            md.text('Gender:', data['gender']),
-            md.text('Q1:', data['q1']),
-            md.text('Q14:', data['q1']),
-            sep='\n',
-        ),
-        reply_markup=markup,
-        parse_mode=ParseMode.MARKDOWN,
-    )
+    reply = predict(list)
+    otvet = t.process_two(reply)
+    await bot.send_message(message.chat.id, otvet)
 
     await state.finish()
+
+
+
 
 # Check age. Age gotta be digit
 @dp.message_handler(lambda message: not message.text.isdigit(), state=Form.age)
@@ -123,7 +298,7 @@ async def process_age_invalid(message: types.Message):
     """
     If age is invalid
     """
-    return await message.reply("Age gotta be a number.\nHow old are you? (digits only)")
+    return await message.reply("Требуются цифры.\nСколько тебе лет? (только цифры)")
 
 
 @dp.message_handler(lambda message: message.text.isdigit(), state=Form.age)
@@ -131,7 +306,7 @@ async def process_age(message: types.Message, state: FSMContext):
     # Update state and data
     await Form.next()
     await state.update_data(age=int(message.text))
-
+    list.append(float(message.text))
     # Configure ReplyKeyboardMarkup
     markup = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
     markup.add("Мужской", "Женский")
@@ -146,13 +321,115 @@ async def process_gender_invalid(message: types.Message):
     """
     return await message.reply("Я тебя не понимаю. Выбери свой пол из клавиатуры")
 
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q1)
+async def process_q1_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q2)
+async def process_q2_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q3)
+async def process_q3_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q4)
+async def process_q4_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q5)
+async def process_q5_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q6)
+async def process_q6_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q7)
+async def process_q7_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q8)
+async def process_q8_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q9)
+async def process_q9_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q10)
+async def process_q10_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q11)
+async def process_q11_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q12)
+async def process_q12_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q13)
+async def process_q13_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
+@dp.message_handler(lambda message: message.text not in ["Да", "Нет"], state=Form.q14)
+async def process_q14_invalid(message: types.Message):
+    """
+    проверка да/нет
+    """
+    return await message.reply("Я тебя не понимаю. Выбери ответ из клавиатуры")
+
 
 @dp.message_handler(state=Form.gender)
 async def process_gender(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['gender'] = t.process_one(message.text)
+        list.append(t.process_one(message.text))
+        reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
+        reply_keyboard.add("Да", "Нет")
         await Form.next()
-        await message.reply("ПЕРВЫЙ вопрос", reply_markup=reply_keyboard)
+        await message.reply("Есть ли у Вас признаки полиурии(Увеличенного образования мочи)?", reply_markup=reply_keyboard)
 
 
 

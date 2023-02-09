@@ -3,10 +3,10 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, KeyboardButtonPol
 reply_keyboard = ReplyKeyboardMarkup(keyboard=[
     [
         KeyboardButton(
-        text='ДА'
+        text='Да'
         ),
         KeyboardButton(
-        text='НЕТ'
+        text='Нет'
         )
     ]
 ], resize_keyboard=True, one_time_keyboard=True, input_field_placeholder='Выбери кнопку ↓', selective=True)
