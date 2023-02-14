@@ -147,7 +147,7 @@ async def process_name(message: types.Message, state: FSMContext):
     reply_keyboard.add("Да", "Нет")
 
     await Form.next()
-    await message.reply("Вы больны кандидозом?", reply_markup=reply_keyboard)
+    await message.reply("Вы больны кандидозом(жжение и зуд в области наружных половых органов)?", reply_markup=reply_keyboard)
 
 
 @dp.message_handler(state=Form.q6)
@@ -222,7 +222,7 @@ async def process_name(message: types.Message, state: FSMContext):
     reply_keyboard.add("Да", "Нет")
 
     await Form.next()
-    await message.reply("Вы частично больны синдромом Пареза?", reply_markup=reply_keyboard)
+    await message.reply("Вы больны синдромом Пареза(Неврологический синдром, при котором снижаются силы мышц)?", reply_markup=reply_keyboard)
 
 
 @dp.message_handler(state=Form.q11)
@@ -252,7 +252,7 @@ async def process_name(message: types.Message, state: FSMContext):
     reply_keyboard.add("Да", "Нет")
 
     await Form.next()
-    await message.reply("Вы больны алопецией?", reply_markup=reply_keyboard)
+    await message.reply("Вы больны алопецией(патологическое выпадение волос)?", reply_markup=reply_keyboard)
 
 
 @dp.message_handler(state=Form.q13)
@@ -285,7 +285,8 @@ async def process_name(message: types.Message, state: FSMContext):
 
     reply = predict(list)
     otvet = t.process_two(reply)
-    await bot.send_message(message.chat.id, otvet)
+    await bot.send_message(message.chat.id, otvet,reply_markup=markup,
+            parse_mode=ParseMode.MARKDOWN)
 
     await state.finish()
 
@@ -429,7 +430,7 @@ async def process_gender(message: types.Message, state: FSMContext):
         reply_keyboard = types.ReplyKeyboardMarkup(resize_keyboard=True, selective=True)
         reply_keyboard.add("Да", "Нет")
         await Form.next()
-        await message.reply("Есть ли у Вас признаки полиурии(Увеличенного образования мочи)?", reply_markup=reply_keyboard)
+        await message.reply("Есть ли у Вас признаки полиурии(увеличенное образование мочи)?", reply_markup=reply_keyboard)
 
 
 
