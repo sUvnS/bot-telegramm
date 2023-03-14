@@ -12,18 +12,19 @@ from sklearn.tree import DecisionTreeClassifier
 from tqdm import tqdm
 import numpy as np
 
-data1=pd.read_csv('covid_data.csv')
+data=pd.read_csv('covid_data.csv')
 data2=pd.read_csv('Cleaned-Data.csv')
 
-#print(data.info())
+print(data2.head())
 #https://www.kaggle.com/datasets/meirnizri/covid19-dataset
 #Ctrl+/ - ставит # во все выделенные строчки
 
-data1.pop('DATE_DIED')
-data1.pop('MEDICAL_UNIT')
-mask=(data1['SEX']==2) & (data1['PREGNANT']==0)
-data=data1.loc[~mask]
-#print(data.head())
+data.pop('DATE_DIED')
+data.pop('MEDICAL_UNIT')
+# mask2=(data1['SEX']==2)
+# mask1=(data1['PREGNANT']==0)
+# mask=mask1 & mask2
+# data=data1.loc[~mask]
 
 # mask1=data['MEDV']==50
 # mask2=data['RM']<4
@@ -31,13 +32,14 @@ data=data1.loc[~mask]
 # out_mask=mask1|mask2|mask3
 # data_out=data.loc[~out_mask]
 
+
 #sns.displot(data['AGE'])
 #plt.show()
 
 data.columns=['USMER','SEX','PATIENT_TYPE','INTUBED','PNEUMONIA','AGE','PREGNANT','DIABETES','COPD','ASTHMA','INMSUPR','HIPERTENSION','OTHER_DISEASE','CARDIOVASCULAR','OBESITY','RENAL_CHRONIC','TOBACCO','CLASIFFICATION_FINAL','ICU',]
 data['INTUBED'].replace(97,0,inplace=True)
 data['INTUBED'].replace(99,0,inplace=True)
-data['PREGNANT'].replace(97,0,inplace=True)
+data['PREGNANT'].replace(97,2,inplace=True)
 data['PREGNANT'].replace(99,0,inplace=True)
 data['PREGNANT'].replace(98,0,inplace=True)
 data['ICU'].replace(97,0,inplace=True)
@@ -79,11 +81,11 @@ data['TOBACCO'].replace(98,0,inplace=True)
 #print(data.info())
 
 #sns.heatmap(data, annot=True)
-#sns.displot(data['USMER'],kde=True,height=7,aspect=1.5)
-features=['SEX','PNEUMONIA','AGE','PREGNANT']
-corr_matrix=data[features].corr()
-sns.heatmap(corr_matrix,annot=True,fmt='.2f')
-sns.pairplot(data[features],diag_kind='auto',height=4)
+# #sns.displot(data['USMER'],kde=True,height=7,aspect=1.5)
+# features=['SEX','PNEUMONIA','AGE','PREGNANT']
+# corr_matrix=data[features].corr()
+# sns.heatmap(corr_matrix,annot=True,fmt='.2f')
+# sns.pairplot(data[features],diag_kind='auto',height=4)
 #sns.heatmap(data.corr())
 plt.show()
 
@@ -91,7 +93,7 @@ X=data.drop('CLASIFFICATION_FINAL', axis=1)
 y=data['CLASIFFICATION_FINAL']
 
 #print(X)
-RAND=0
+RAND=42
 X_train,X_test,y_train,y_test=train_test_split(X,y,random_state=RAND,test_size=0.2)
 
 
@@ -122,8 +124,8 @@ classifier=DecisionTreeClassifier(min_samples_split=60,max_depth=28,criterion='e
 classifier.fit(X_train,y_train)
 y_pred=classifier.predict(X_test)
 
-# print(sklearn.metrics.confusion_matrix(y_test,y_pred))
-# print(sklearn.metrics.accuracy_score(y_test,y_pred))
+print(sklearn.metrics.confusion_matrix(y_test,y_pred))
+print(sklearn.metrics.accuracy_score(y_test,y_pred))
 
 
 df_final = pd.get_dummies(data, columns = ['USMER', 'SEX', 'PATIENT_TYPE', 'INTUBED', 'PNEUMONIA',
