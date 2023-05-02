@@ -12,31 +12,45 @@ from sklearn.tree import DecisionTreeClassifier
 from tqdm import tqdm
 import numpy as np
 
+
 data=pd.read_csv('Cleaned-Data.csv')
 
 data = data.drop(['Country'], axis = 1)
 data = data.drop(['Gender_Transgender'],axis = 1)
 data = data.drop(['Severity_Mild'],axis = 1)
 data = data.drop(['Severity_Moderate'],axis = 1)
-#data = data.drop(['Severity_None'],axis = 1)
-data = data.drop(['Severity_Severe'],axis = 1)
+data = data.drop(['Severity_None'],axis = 1)
+data = data.drop(['Diarrhea'],axis = 1)
+data = data.drop(['None_Sympton'],axis = 1)
+data = data.drop(['None_Experiencing'],axis = 1)
+    #data = data.drop(['Severity_Severe'],axis = 1)
 
 print(data.info())
-#print(data.head())
+    #print(data.head())
 
-#print(data.nunique())
+    #print(data.nunique())
 
-X=data.drop('Severity_None', axis=1)
-y=data['Severity_None']
+X=data.drop('Severity_Severe', axis=1)
+y=data['Severity_Severe']
 
-#print(y)
+    #print(y)
 
-RAND=0
+RAND=100
 X_train,X_test,y_train,y_test=train_test_split(X,y,random_state=RAND,test_size=0.2)
 
 classifier=RandomForestClassifier(n_estimators=100,criterion='entropy',random_state=RAND)
 classifier.fit(X_train,y_train)
 y_pred=classifier.predict(X_test)
 
-print(sklearn.metrics.confusion_matrix(y_test,y_pred))
-print(sklearn.metrics.accuracy_score(y_test,y_pred))
+    #print(sklearn.metrics.confusion_matrix(y_test,y_pred))
+    #print(sklearn.metrics.accuracy_score(y_test,y_pred))
+
+def predict_c(data_list):
+        global X_train
+        global y_train
+        global RAND
+        classifier=RandomForestClassifier(n_estimators=100,criterion='entropy',random_state=RAND)
+        classifier.fit(X_train,y_train)
+        #y_pred=classifier.predict(X_test)
+        y_pred=classifier.predict([data_list])
+        return y_pred
