@@ -1,1 +1,1 @@
-from my_handlers import handlers
+from my_handlers import handlers_d

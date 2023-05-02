@@ -25,7 +25,7 @@ data = data.drop(['None_Sympton'],axis = 1)
 data = data.drop(['None_Experiencing'],axis = 1)
     #data = data.drop(['Severity_Severe'],axis = 1)
 
-print(data.info())
+#print(data.info())
     #print(data.head())
 
     #print(data.nunique())

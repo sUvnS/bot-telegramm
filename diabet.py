@@ -48,7 +48,7 @@ data['Alopecia'].replace('No',0, inplace=True)
 data['Obesity'].replace('Yes',1, inplace=True)
 data['Obesity'].replace('No',0, inplace=True)
 
-#print(data.head())
+#print(data.info())
 
 X=data.iloc[:,0:16].values
 Y=data.iloc[:,16].values

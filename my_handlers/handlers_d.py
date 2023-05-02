@@ -411,7 +411,7 @@ async def cmd_start4(msg: types.Message):
     photo = InputFile("diabetes.jpg")
     await bot.send_photo(msg.chat.id, photo=photo)
 
-def register_handlers(dp : Dispatcher):
+def register_handlers_d(dp : Dispatcher):
     dp.register_message_handler(cmd_start1, commands='begin_diabetes')
     dp.register_message_handler(cancel_handler, Text(equals='cancel', ignore_case=True), state='*')
     dp.register_message_handler(process_name1, state=Form.q1)
