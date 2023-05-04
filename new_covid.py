@@ -46,9 +46,6 @@ y_pred=classifier.predict(X_test)
     #print(sklearn.metrics.accuracy_score(y_test,y_pred))
 
 def predict_c(data_list):
-        global X_train
-        global y_train
-        global RAND
         classifier=RandomForestClassifier(n_estimators=100,criterion='entropy',random_state=RAND)
         classifier.fit(X_train,y_train)
         #y_pred=classifier.predict(X_test)

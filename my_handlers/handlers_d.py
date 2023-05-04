@@ -27,13 +27,16 @@ class Form(StatesGroup):
     q13 = State()
     q14 = State()
 
-
+t=Translate()
+list=[]
 #@dp.message_handler(commands='begin_diabetes')
 async def cmd_start1(message: types.Message):
     """
     начало опроса
     """
+    global list
     # Set state
+    list = []
     await Form.age.set()
 
     await message.reply("Укажите свой возраст")
@@ -56,8 +59,7 @@ async def cancel_handler(message: types.Message, state: FSMContext):
     # And remove keyboard (just in case)
     await message.reply('Cancelled.', reply_markup=types.ReplyKeyboardRemove())
 
-t=Translate()
-list=list()
+
 
 #@dp.message_handler(state=Form.q1)
 async def process_name1(message: types.Message, state: FSMContext):
@@ -398,18 +400,26 @@ async def process_gender(message: types.Message, state: FSMContext):
 
 #@dp.message_handler(commands=["start"])
 async def cmd_start2(message: types.Message):
-    await message.answer("Рад Вас приветствовать! Я могу протестировать Вас на наличие симптомов при диабете. Для начала напишите команду /begin \n" \
-                         "Если хотите узнать, чем опасен диабет, напишите команду /info \n" \
-                         "Для завершения работы бота напишите команду /stop")#написать описание, дисклеймер
+    await message.answer("Рад Вас приветствовать! Я могу протестировать Вас на наличие симптомов при диабете и covid-19.\n"
+                        "Для начала опроса о диабете напишите команду /begin_diabetes \n"
+                        "Если хотите узнать, чем опасен диабет, напишите команду /info_diabetes \n"
+                        "Для начала опроса о covid-19, напишите команду /begin_covid \n"
+                        "Чтобы узнать информацию об опасности covid-19, напишите команду /info_covid \n"
+                        "Для завершения работы бота напишите команду /stop")
+
+
 
 #@dp.message_handler(commands=["stop"])
 async def cmd_start3(message: types.Message):
-    await message.answer("Bye-bye :c")
+    await message.answer("Bye-bye :c \n"
+                         'Надеюсь, что вам понравилась моя работа)')
 
 #@dp.message_handler(commands=["info_diabetes"])
 async def cmd_start4(msg: types.Message):
     photo = InputFile("diabetes.jpg")
     await bot.send_photo(msg.chat.id, photo=photo)
+async def cmd_start5(message: types.Message):
+    await message.answer("Covid-19 — это коронавирусная инфекция, поражающая дыхательную систему. Попадая в организм, вирус COVID вызывает появление большого количества свободных радикалов — активных молекул кислорода, которые провоцируют развитие окислительных процессов.")
 
 def register_handlers_d(dp : Dispatcher):
     dp.register_message_handler(cmd_start1, commands='begin_diabetes')
@@ -449,3 +459,4 @@ def register_handlers_d(dp : Dispatcher):
     dp.register_message_handler(cmd_start2, commands=["start"])
     dp.register_message_handler(cmd_start3, commands=["stop"])
     dp.register_message_handler(cmd_start4, commands=["info_diabetes"])
+    dp.register_message_handler(cmd_start5, commands=["info_covid"])

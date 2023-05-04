@@ -25,7 +25,7 @@ class Form1(StatesGroup):
     q9 = State()
 
 
-list=list()
+list=[]
 t=Translate()
 from new_covid import predict_c
 
@@ -34,7 +34,10 @@ async def cmd_start1(message: types.Message):
     """
     начало опроса
     """
+    global list
     # Set state
+    list = []
+
     await Form1.age.set()
 
     await message.reply("Укажите свой возраст")
@@ -262,7 +265,7 @@ async def process_name9(message: types.Message, state: FSMContext):
     #тут надо отправить ответ
     # Finish conversation
 
-
+    await message.answer('Загрузка..')
     reply = predict_c(list)
     otvet = t.process_four(reply)
     await bot.send_message(message.chat.id, otvet,reply_markup=markup,
